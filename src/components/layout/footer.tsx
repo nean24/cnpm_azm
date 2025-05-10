@@ -11,7 +11,7 @@ const ZaloIcon = () => (
 
 export function Footer() {
   return (
-    <footer className="bg-footer-background text-footer-foreground py-12 md:py-16">
+    <footer className="bg-footer text-footer-foreground py-12 md:py-16">
       <div className="container mx-auto grid grid-cols-1 gap-8 px-4 md:grid-cols-3 md:px-6">
         <div>
           <h3 className="mb-4 text-lg font-semibold text-primary">Amazing Cinema</h3>
