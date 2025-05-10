@@ -55,16 +55,16 @@ export function Header() {
               href={item.href}
               className={cn(
                 "text-sm font-medium text-primary-foreground hover:text-accent transition-colors duration-200",
-                "relative group block px-3 py-2 rounded-md", // Added block for layout consistency
+                "relative group block px-3 py-2 rounded-md",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background"
               )}
             >
               {item.label}
               <span
                 className={cn(
-                  "absolute bottom-1 left-0 right-0 h-[2px]", // Positioned 4px from the bottom of the link's padding box
-                  "bg-accent", // Underline color
-                  "origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" // Animation
+                  "absolute bottom-1 left-0 right-0 h-[2px]",
+                  "bg-accent", 
+                  "origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
                 )}
               />
             </Link>
@@ -88,10 +88,10 @@ export function Header() {
             {currentAuthItems.map((item) => (
                <Button
                 key={item.href}
-                variant={item.href.includes('register') || item.href.includes('profile') ? "default" : "outline"}
+                variant={(item.href.includes('register') || item.href.includes('profile') || item.href.includes('login')) ? "default" : "outline"}
                 asChild
                 className={cn("text-sm",
-                  (item.href.includes('register') || item.href.includes('profile'))
+                  (item.href.includes('register') || item.href.includes('profile') || item.href.includes('login'))
                   ? "bg-accent hover:bg-accent/90 text-accent-foreground" 
                   : "border-primary-foreground/30 hover:bg-primary/80 hover:text-primary-foreground text-primary-foreground"
                 )}
@@ -121,3 +121,4 @@ export function Header() {
     </header>
   );
 }
+
