@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -58,7 +59,6 @@ export function Header() {
           <Film className={cn("h-8 w-8", pathname === '/' && !isScrolled ? "text-white" : "text-primary-foreground" )} />
           <div className="flex flex-col">
             <span className={cn("text-2xl font-bold", pathname === '/' && !isScrolled ? "text-white" : "text-primary-foreground" )}>Amazing Cinema</span>
-            <span className={cn("text-xs", pathname === '/' && !isScrolled ? "text-gray-200" : "text-primary-foreground/80" )}>Your Ultimate Movie Experience</span>
           </div>
         </Link>
 
