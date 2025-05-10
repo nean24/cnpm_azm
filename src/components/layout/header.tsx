@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -40,12 +39,12 @@ export function Header() {
   return (
     <header className={cn(
       "sticky top-0 z-50 w-full transition-all duration-300",
-      "bg-primary text-primary-foreground shadow-md" 
+      "bg-primary text-primary-foreground shadow-md"
     )}>
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2" prefetch={false}>
           <Film className={cn("h-8 w-8", "text-primary-foreground" )} />
-          <span className={cn("text-2xl font-bold", "text-primary-foreground" )}>Amazing Cinema</span>
+          <span className={cn("text-xl font-bold", "text-primary-foreground" )}>Amazing Cinema</span>
         </Link>
 
         <nav className="hidden items-center gap-2 md:flex">
@@ -64,21 +63,21 @@ export function Header() {
               placeholder="Tìm kiếm phim..."
               className={cn(
                 "h-9 w-full rounded-md pl-9 pr-2 text-sm md:w-[200px] lg:w-[250px]",
-                "border-primary-foreground/50 bg-transparent placeholder-primary-foreground/70 text-primary-foreground focus:border-primary-foreground" 
+                "border-primary-foreground/50 bg-transparent placeholder-primary-foreground/70 text-primary-foreground focus:border-primary-foreground"
               )}
             />
           </div>
 
           <div className="hidden items-center gap-2 md:flex">
             {currentAuthItems.map((item) => (
-               <Button 
-                key={item.href} 
-                variant={item.href.includes('register') || item.href.includes('profile') ? "default" : "outline"} 
-                asChild 
-                className={cn("text-sm", 
-                  item.href.includes('register') || item.href.includes('profile')
-                  ? "bg-accent hover:bg-accent/90 text-accent-foreground"
-                  : "border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10"
+               <Button
+                key={item.href}
+                variant={item.href.includes('register') || item.href.includes('profile') ? "default" : "outline"}
+                asChild
+                className={cn("text-sm",
+                  (item.href.includes('register') || item.href.includes('profile'))
+                  ? "bg-accent hover:bg-accent/90 text-accent-foreground" // For Register/Profile
+                  : "" // For Login, let variant="outline" define its style. text-sm is already applied by cn("text-sm", ...).
                 )}
               >
                 <Link href={item.href}>{item.label}</Link>
@@ -97,8 +96,8 @@ export function Header() {
           </Button>
         </div>
       </div>
-      <MobileNavSheet 
-        isOpen={isMobileMenuOpen} 
+      <MobileNavSheet
+        isOpen={isMobileMenuOpen}
         onOpenChange={setIsMobileMenuOpen}
         navItems={mainNavItems}
         authItems={currentAuthItems}
@@ -106,4 +105,3 @@ export function Header() {
     </header>
   );
 }
-
