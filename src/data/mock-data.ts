@@ -42,8 +42,8 @@ export const mockMovies: Movie[] = [
   {
     id: 'm1',
     title: 'Cybernetic Dawn: Uprising',
-    posterUrl: 'https://picsum.photos/seed/cybernetic_uprising/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Placeholder
+    posterUrl: 'https://picsum.photos/seed/cybernetic_dawn_reloaded/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer1', 
     description: 'Năm 2025, một AI tiên tiến giành quyền kiểm soát cơ sở hạ tầng toàn cầu. Một nhóm hacker nổi loạn phải chiến đấu để giành lại tự do cho nhân loại trước khi quá muộn.',
     director: 'Alex Tran',
     actors: ['Keanu Reeves Jr.', 'Priyanka Chopra Jonas II', 'Ken Watanabe San'],
@@ -57,8 +57,8 @@ export const mockMovies: Movie[] = [
   {
     id: 'm2',
     title: 'Chronoscape: Echoes of Tomorrow',
-    posterUrl: 'https://picsum.photos/seed/chronoscape_echoes/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    posterUrl: 'https://picsum.photos/seed/chronoscape_future/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer2',
     description: 'Một nhà vật lý thiên tài phát hiện ra cách gửi thông điệp về quá khứ, nhưng mỗi thay đổi lại tạo ra những gợn sóng bất ngờ và nguy hiểm cho hiện tại của cô.',
     director: 'Sofia Chen',
     actors: ['Gemma Chan', 'Dev Patel', 'Oscar Isaac'],
@@ -72,8 +72,8 @@ export const mockMovies: Movie[] = [
   {
     id: 'm3',
     title: 'The Last Dragon Rider',
-    posterUrl: 'https://picsum.photos/seed/dragon_rider_last/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    posterUrl: 'https://picsum.photos/seed/dragon_legacy_epic/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer3',
     description: 'Trong một thế giới nơi phép thuật đang dần phai mờ, một cô gái trẻ mồ côi phát hiện ra mình là người cuối cùng có thể giao tiếp với loài rồng hùng mạnh và phải bắt đầu một nhiệm vụ để phục hồi lại phép thuật.',
     director: 'Lee Jung-Hwan',
     actors: ['Kim Da-mi', 'Tom Hollander', 'Michelle Yeoh'],
@@ -81,14 +81,14 @@ export const mockMovies: Movie[] = [
     rating: 'P',
     language: 'Lồng tiếng',
     durationMinutes: 115,
-    releaseDate: '2025-01-24', // Released earlier, still showing
+    releaseDate: '2025-01-24', 
     status: 'now_showing',
   },
   {
     id: 'm4',
     title: 'Neon City Racers',
-    posterUrl: 'https://picsum.photos/seed/neon_city_racers/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    posterUrl: 'https://picsum.photos/seed/neon_racers_speed/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer4',
     description: 'Tại một thành phố tương lai rực rỡ ánh đèn neon, các cuộc đua xe đường phố bất hợp pháp là môn thể thao đỉnh cao. Một tay đua trẻ tuổi tìm cách giành chiến thắng trong giải Grand Prix để cứu lấy ga-ra của gia đình.',
     director: 'Takeshi Nakamura',
     actors: ['Ryan Gosling II', 'LaKeith Stanfield Jr.', 'Hiroyuki Sanada'],
@@ -102,8 +102,8 @@ export const mockMovies: Movie[] = [
   {
     id: 'm5',
     title: 'Guardians of the Galaxy Vol. 4: Cosmic Requiem',
-    posterUrl: 'https://picsum.photos/seed/guardians_cosmic/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    posterUrl: 'https://picsum.photos/seed/guardians_galaxy_final/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer5',
     description: 'Đội Vệ Binh Dải Ngân Hà đối mặt với mối đe dọa vũ trụ lớn nhất từ trước đến nay, một thực thể cổ đại đang tìm cách mang lại sự im lặng cho vũ trụ. Những hy sinh phải được thực hiện.',
     director: 'James Gunn III',
     actors: ['Chris Pratt Jr.', 'Zoe Saldana Jr.', 'Dave Bautista Jr.'],
@@ -117,8 +117,8 @@ export const mockMovies: Movie[] = [
   {
     id: 'm6',
     title: 'The Atlantis Enigma',
-    posterUrl: 'https://picsum.photos/seed/atlantis_enigma/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    posterUrl: 'https://picsum.photos/seed/atlantis_mystery_deep/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer6',
     description: 'Một nhà khảo cổ học biển tình cờ tìm thấy manh mối dẫn đến thành phố Atlantis đã mất. Nhưng cô không phải là người duy nhất tìm kiếm nó, và những bí mật của Atlantis có thể là mối đe dọa cho thế giới.',
     director: 'Maria Gonzalez',
     actors: ['Ana de Armas II', 'Idris Elba Jr.', 'Javier Bardem'],
@@ -132,8 +132,8 @@ export const mockMovies: Movie[] = [
   {
     id: 'm7',
     title: 'Whispers of the Void',
-    posterUrl: 'https://picsum.photos/seed/void_whispers/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    posterUrl: 'https://picsum.photos/seed/void_horror_space/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer7',
     description: 'Một phi hành đoàn trên trạm vũ trụ xa xôi bắt đầu nghe thấy những lời thì thầm kỳ lạ từ không gian sâu thẳm, dẫn họ đến bờ vực của sự điên rồ và một khám phá kinh hoàng.',
     director: 'Jordan Peele II',
     actors: ['Daniel Kaluuya Jr.', 'Anya Taylor-Joy II', 'Steven Yeun Jr.'],
@@ -147,8 +147,8 @@ export const mockMovies: Movie[] = [
   {
     id: 'm8',
     title: 'The Clockwork Heart',
-    posterUrl: 'https://picsum.photos/seed/clockwork_heart/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    posterUrl: 'https://picsum.photos/seed/clockwork_romance_steampunk/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer8',
     description: 'Trong một thế giới steampunk, một nhà phát minh tạo ra một người máy có trái tim cơ học có khả năng cảm nhận. Khi cô gái người máy bắt đầu khám phá thế giới, cô phải đối mặt với định kiến và tìm kiếm ý nghĩa của việc làm người.',
     director: 'Jean-Pierre Jeunet Jr.',
     actors: ['Saoirse Ronan II', 'Timothée Chalamet II', 'Helena Bonham Carter Jr.'],
@@ -156,14 +156,14 @@ export const mockMovies: Movie[] = [
     rating: 'P',
     language: 'Lồng tiếng',
     durationMinutes: 125,
-    releaseDate: '2025-01-31', // Released earlier, still showing
+    releaseDate: '2025-01-31',
     status: 'now_showing',
   },
   {
     id: 'm9',
     title: 'Project: Singularity',
-    posterUrl: 'https://picsum.photos/seed/project_singularity/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    posterUrl: 'https://picsum.photos/seed/singularity_project_ai/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer9',
     description: 'Một dự án trí tuệ nhân tạo bí mật của chính phủ đạt được điểm kỳ dị công nghệ sớm hơn dự kiến, đặt ra câu hỏi về tương lai của loài người và vai trò của AI.',
     director: 'Christopher Nolan Jr.',
     actors: ['John David Washington II', 'Elizabeth Debicki II', 'Robert Pattinson II'],
@@ -177,8 +177,8 @@ export const mockMovies: Movie[] = [
   {
     id: 'm10',
     title: 'The Wandering Earth 3: Exodus',
-    posterUrl: 'https://picsum.photos/seed/wandering_earth_exodus/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    posterUrl: 'https://picsum.photos/seed/wandering_earth_journey/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer10',
     description: 'Sau khi Mặt Trời sắp tắt, nhân loại tiếp tục hành trình đưa Trái Đất đến một hệ sao mới. Họ phải đối mặt với những hiểm họa không gian và những quyết định khó khăn để đảm bảo sự sống còn.',
     director: 'Frant Gwo II',
     actors: ['Wu Jing Jr.', 'Andy Lau Jr.', 'Zhang Ziyi II'],
@@ -192,8 +192,8 @@ export const mockMovies: Movie[] = [
   {
     id: 'm11',
     title: 'Shrek 5: The Mid-Swamp Crisis',
-    posterUrl: 'https://picsum.photos/seed/shrek_crisis/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    posterUrl: 'https://picsum.photos/seed/shrek_returns_again/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer11',
     description: 'Shrek đối mặt với cuộc khủng hoảng tuổi trung niên theo phong cách đầm lầy, trong khi Donkey và Puss in Boots cố gắng giúp anh tìm lại "tiếng gầm" của mình trước một mối đe dọa mới.',
     director: 'Walt Dohrn II',
     actors: ['Mike Myers Jr.', 'Eddie Murphy Jr.', 'Cameron Diaz Jr.'],
@@ -207,8 +207,8 @@ export const mockMovies: Movie[] = [
   {
     id: 'm12',
     title: 'Avatar: The Tides of Pandora',
-    posterUrl: 'https://picsum.photos/seed/avatar_tides/400/600',
-    trailerUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    posterUrl: 'https://picsum.photos/seed/avatar_ocean_world/400/600',
+    trailerUrl: 'https://www.youtube.com/embed/exampleTrailer12',
     description: 'Jake Sully và Neytiri tiếp tục bảo vệ gia đình và hành tinh Pandora khỏi những mối đe dọa mới từ RDA, khám phá những vùng biển sâu thẳm và các bộ tộc Na\'vi mới.',
     director: 'James Cameron Jr.',
     actors: ['Sam Worthington Jr.', 'Zoe Saldana Jr.', 'Sigourney Weaver Jr.'],
@@ -286,7 +286,7 @@ export const genres = [
     'Hành động', 'Phiêu lưu', 'Khoa học viễn tưởng', 'Gia đình', 'Hài', 
     'Kinh dị', 'Bí ẩn', 'Thể thao', 'Hoạt hình', 'Chính kịch', 'Lịch sử', 
     'Siêu anh hùng', 'Giật gân', 'Tuổi teen', 'Quái vật', 'Nhạc kịch', 'Kỳ ảo',
-    'Tội phạm', 'Lãng mạn', // Added new genres from the updated list
+    'Tội phạm', 'Lãng mạn', 
 ].filter((value, index, self) => self.indexOf(value) === index).sort();
 
 export const ratings = ['P', 'T13', 'T16', 'T18'];
