@@ -166,7 +166,7 @@ export default function BookingPage({ params }: BookingPageProps) {
           </div>
 
           <div className="lg:col-span-1">
-            <Card className="sticky top-24 shadow-lg">
+            <Card className="shadow-lg">
               <CardHeader>
                 <CardTitle className="text-xl">Tóm Tắt Đơn Hàng</CardTitle>
               </CardHeader>
