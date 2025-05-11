@@ -1,3 +1,4 @@
+
 import { MainLayout } from '@/components/layout/main-layout';
 import { getMovieById, getShowtimesByMovieId, mockCinemas, type Showtime, type Cinema, type Hall } from '@/data/mock-data';
 import Image from 'next/image';
@@ -7,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Clock, CalendarDays, Users, Video, Tag, Languages, Star, MapPin } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface MovieDetailPageProps {
   params: { id: string };
@@ -25,8 +27,16 @@ export default function MovieDetailPage({ params }: MovieDetailPageProps) {
   if (!movie) {
     return (
       <MainLayout>
-        <div className="container mx-auto flex h-[60vh] items-center justify-center px-4 py-12 text-center md:px-6">
-          <h1 className="text-3xl font-bold">Không tìm thấy phim</h1>
+        <div className="container mx-auto flex h-[calc(100vh-theme(spacing.40))] items-center justify-center px-4 py-12 text-center md:px-6">
+          <Alert variant="destructive" className="max-w-md">
+            <AlertTitle className="text-2xl">Không tìm thấy phim</AlertTitle>
+            <AlertDescription className="text-lg">
+              Phim bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.
+              <Button variant="link" asChild className="mt-4 block text-lg">
+                <Link href="/">Trở về trang chủ</Link>
+              </Button>
+            </AlertDescription>
+          </Alert>
         </div>
       </MainLayout>
     );
@@ -59,8 +69,8 @@ export default function MovieDetailPage({ params }: MovieDetailPageProps) {
               alt={`Poster phim ${movie.title}`}
               width={600}
               height={900}
-              className="w-full rounded-lg object-cover shadow-xl"
-              data-ai-hint="movie poster detail"
+              className="w-full rounded-lg object-cover shadow-xl aspect-[2/3]"
+              data-ai-hint="movie poster" // General hint for movie posters
             />
           </div>
 
@@ -81,7 +91,7 @@ export default function MovieDetailPage({ params }: MovieDetailPageProps) {
               <div><strong className="font-semibold">Ngày phát hành:</strong> {new Date(movie.releaseDate).toLocaleDateString('vi-VN')}</div>
             </div>
 
-            {movie.trailerUrl && (
+            {movie.trailerUrl && movie.trailerUrl !== 'https://www.youtube.com/embed/dQw4w9WgXcQ' && ( // Check for placeholder
               <div className="mb-8">
                 <h2 className="mb-3 text-2xl font-semibold">Trailer</h2>
                 <div className="aspect-video overflow-hidden rounded-lg border">
@@ -119,7 +129,7 @@ export default function MovieDetailPage({ params }: MovieDetailPageProps) {
                     {cinemaDetails && <p className="text-sm text-muted-foreground">{cinemaDetails.address}</p>}
                   </CardHeader>
                   <CardContent>
-                    {Object.entries(dates).map(([date, times]) => (
+                    {Object.entries(dates).sort((a,b) => new Date(a[0]).getTime() - new Date(b[0]).getTime()).map(([date, times]) => (
                       <div key={date} className="mb-4">
                         <h4 className="mb-2 flex items-center gap-2 text-lg font-semibold">
                           <CalendarDays className="h-5 w-5"/> {new Date(date).toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
@@ -152,3 +162,4 @@ export default function MovieDetailPage({ params }: MovieDetailPageProps) {
     </MainLayout>
   );
 }
+

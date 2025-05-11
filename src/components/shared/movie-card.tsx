@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,7 +23,7 @@ export function MovieCard({ movie, className }: MovieCardProps) {
             width={400}
             height={600}
             className="h-full w-full object-cover"
-            data-ai-hint="movie poster"
+            data-ai-hint="movie poster" // General hint for movie posters
           />
         </Link>
         <Badge variant={movie.status === 'now_showing' ? "destructive" : "secondary"} className="absolute top-2 right-2 bg-primary text-primary-foreground">
@@ -36,7 +37,7 @@ export function MovieCard({ movie, className }: MovieCardProps) {
           </Link>
         </CardTitle>
         <div className="flex flex-wrap gap-2 text-xs">
-          {movie.genre.map((g) => (
+          {movie.genre.slice(0, 2).map((g) => ( // Show max 2 genres
             <Badge key={g} variant="outline">{g}</Badge>
           ))}
           <Badge variant="outline">{movie.rating}</Badge>
@@ -46,7 +47,11 @@ export function MovieCard({ movie, className }: MovieCardProps) {
         <Button asChild className="w-full bg-primary hover:bg-accent">
           <Link href={`/movies/${movie.id}`}>Chi Tiết</Link>
         </Button>
+        <Button asChild variant="outline" className="w-full ml-2">
+          <Link href={`/booking/${movie.id}`}>Đặt Vé</Link>
+        </Button>
       </CardFooter>
     </Card>
   );
 }
+

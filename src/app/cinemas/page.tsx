@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { MainLayout } from '@/components/layout/main-layout';
 import { PageTitle } from '@/components/shared/page-title';
 import { mockCinemas, mockShowtimes, mockMovies, type Cinema, type Showtime, type Movie } from '@/data/mock-data';
@@ -21,20 +21,29 @@ const getMovieTitle = (movieId: string): string => {
 
 const getMoviePoster = (movieId: string): string => {
   const movie = mockMovies.find(m => m.id === movieId);
-  return movie ? movie.posterUrl : "https://picsum.photos/100/150";
+  return movie ? movie.posterUrl : "https://picsum.photos/seed/unknown_movie/100/150";
 }
 
 export default function CinemasPage() {
   const [selectedCinemaType, setSelectedCinemaType] = useState<'Tất cả rạp' | 'Rạp VIP' | 'all'>('all');
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    // Set current date on client-side to avoid hydration mismatch
+    setCurrentDate(new Date().toISOString().split('T')[0]);
+  }, []);
+
 
   const filteredCinemas = useMemo(() => {
     if (selectedCinemaType === 'all') return mockCinemas;
     return mockCinemas.filter(cinema => cinema.type === selectedCinemaType);
   }, [selectedCinemaType]);
   
-  // Group showtimes by movie for a specific cinema
+  // Group showtimes by movie for a specific cinema for the current date
   const getGroupedShowtimesForCinema = (cinemaId: string) => {
-    const cinemaShowtimes = mockShowtimes.filter(st => st.cinemaId === cinemaId);
+    if (!currentDate) return {}; // Don't filter if date not set yet
+    
+    const cinemaShowtimes = mockShowtimes.filter(st => st.cinemaId === cinemaId && st.date === currentDate);
     const grouped: Record<string, Showtime[]> = {};
     cinemaShowtimes.forEach(st => {
       if (!grouped[st.movieId]) {
@@ -79,7 +88,7 @@ export default function CinemasPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="p-4 md:p-6">
-                  <h3 className="mb-4 text-xl font-semibold">Lịch chiếu phim hôm nay:</h3>
+                  <h3 className="mb-4 text-xl font-semibold">Lịch chiếu phim hôm nay ({currentDate ? new Date(currentDate).toLocaleDateString('vi-VN') : 'Đang tải...'}):</h3>
                   {Object.keys(groupedShowtimes).length > 0 ? (
                     <div className="space-y-6">
                       {Object.entries(groupedShowtimes).map(([movieId, times]) => (
@@ -92,7 +101,7 @@ export default function CinemasPage() {
                                 width={150} 
                                 height={225} 
                                 className="w-full rounded-md object-cover aspect-[2/3]"
-                                data-ai-hint="movie poster cinema" 
+                                data-ai-hint="movie poster" // General hint for movie posters
                               />
                             </Link>
                           </div>
@@ -135,3 +144,4 @@ export default function CinemasPage() {
     </MainLayout>
   );
 }
+

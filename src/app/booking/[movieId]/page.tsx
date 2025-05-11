@@ -1,18 +1,22 @@
+
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MainLayout } from '@/components/layout/main-layout';
 import { PageTitle } from '@/components/shared/page-title';
 import { SeatMap } from '@/components/booking/seat-map';
 import { BookingForm } from '@/components/booking/booking-form';
-import { getMovieById, type Movie, type Showtime as ShowtimeType } from '@/data/mock-data'; // Assuming Showtime type is exported
+import { getMovieById, type Movie, type Showtime as ShowtimeType } from '@/data/mock-data'; 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Ticket, Calendar, Clock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import Link from 'next/link';
+import { Separator } from '@/components/ui/separator';
+
 
 interface BookingPageProps {
   params: { movieId: string };
@@ -21,21 +25,50 @@ interface BookingPageProps {
 interface SelectedSeat {
   id: string;
   label: string;
-  status: string; // Assuming SeatStatus is a string union
+  status: string; 
 }
 
 export default function BookingPage({ params }: BookingPageProps) {
   const router = useRouter();
   const { toast } = useToast();
   const searchParams = useSearchParams();
-  const showtimeId = searchParams.get('showtime'); // Example: ?showtime=st1
+  const showtimeQuery = searchParams.get('showtime'); 
 
-  const movie = getMovieById(params.movieId);
-  // In a real app, you'd fetch showtime details using showtimeId
-  // For now, let's assume a placeholder showtime if movie exists
-  const placeholderShowtime = movie ? { time: "19:00", date: "2024-07-28", hall: "Hội trường A", format: "2D" } : null;
-
+  const [movie, setMovie] = useState<Movie | undefined | null>(null);
+  const [showtime, setShowtime] = useState<ShowtimeType | null>(null); // Placeholder for actual showtime data
   const [selectedSeats, setSelectedSeats] = useState<SelectedSeat[]>([]);
+
+  useEffect(() => {
+    const fetchedMovie = getMovieById(params.movieId);
+    setMovie(fetchedMovie);
+
+    // In a real app, you'd fetch showtime details using showtimeQuery
+    // For this mock, we'll find it or use a placeholder
+    if (fetchedMovie && showtimeQuery) {
+      // This is a simplified mock. A real app would query its showtime data source.
+      // Here, we assume a placeholder structure.
+      const placeholderShowtime = { 
+        id: showtimeQuery,
+        time: "19:00", 
+        date: new Date().toISOString().split('T')[0], // Today's date
+        hall: "Hội trường A", 
+        format: "2D" 
+      };
+      setShowtime(placeholderShowtime as any);
+    } else if (fetchedMovie) {
+      // Fallback if no showtime in query, perhaps default to first available or just movie info
+       const fallbackShowtime = { 
+        id: 'default',
+        time: "N/A", 
+        date: "N/A", 
+        hall: "N/A", 
+        format: "N/A" 
+      };
+      setShowtime(fallbackShowtime as any);
+    }
+
+  }, [params.movieId, showtimeQuery]);
+
 
   const handleSeatsSelected = (seats: SelectedSeat[]) => {
     setSelectedSeats(seats);
@@ -50,10 +83,18 @@ export default function BookingPage({ params }: BookingPageProps) {
       });
       return;
     }
+    if (!movie || !showtime) {
+        toast({
+            variant: "destructive",
+            title: "Lỗi thông tin",
+            description: "Không thể đặt vé do thiếu thông tin phim hoặc suất chiếu.",
+        });
+        return;
+    }
 
     console.log("Booking Submitted:", {
       movie: movie?.title,
-      showtime: placeholderShowtime,
+      showtime: showtime,
       seats: selectedSeats.map(s => s.label),
       userInfo: formData,
     });
@@ -67,19 +108,28 @@ export default function BookingPage({ params }: BookingPageProps) {
       duration: 5000,
     });
     
-    // Redirect to a confirmation page or profile/history
     router.push(`/profile?booking_success=${params.movieId}`); 
   };
+
+  if (movie === null) { // Still loading movie data
+    return (
+      <MainLayout>
+        <div className="container mx-auto flex h-[60vh] items-center justify-center px-4 py-12">
+          <p className="text-xl text-muted-foreground">Đang tải thông tin phim...</p>
+        </div>
+      </MainLayout>
+    )
+  }
 
   if (!movie) {
     return (
       <MainLayout>
-        <div className="container mx-auto flex h-[60vh] items-center justify-center px-4 py-12 text-center md:px-6">
-          <Alert variant="destructive">
-            <AlertTitle>Phim không hợp lệ</AlertTitle>
-            <AlertDescription>
+        <div className="container mx-auto flex h-[calc(100vh-theme(spacing.40))] items-center justify-center px-4 py-12 text-center md:px-6">
+           <Alert variant="destructive" className="max-w-md">
+            <AlertTitle className="text-2xl">Phim không hợp lệ</AlertTitle>
+            <AlertDescription className="text-lg">
               Không thể tiến hành đặt vé vì thông tin phim không tìm thấy.
-              <Button variant="link" asChild className="mt-2 block"><Link href="/">Trở về trang chủ</Link></Button>
+              <Button variant="link" asChild className="mt-4 block text-lg"><Link href="/">Trở về trang chủ</Link></Button>
             </AlertDescription>
           </Alert>
         </div>
@@ -98,16 +148,16 @@ export default function BookingPage({ params }: BookingPageProps) {
 
         <div className="grid gap-8 lg:grid-cols-3 lg:gap-12">
           <div className="lg:col-span-2">
-            {placeholderShowtime && (
+            {showtime && (
                 <Card className="mb-6 bg-secondary/50">
                     <CardHeader>
                         <CardTitle className="text-xl">Thông tin suất chiếu</CardTitle>
                     </CardHeader>
                     <CardContent className="grid grid-cols-2 gap-4 sm:grid-cols-4 text-sm">
-                        <div className="flex items-center gap-2"><Calendar className="h-4 w-4 text-primary" /> <span>{placeholderShowtime.date}</span></div>
-                        <div className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> <span>{placeholderShowtime.time}</span></div>
-                        <div className="flex items-center gap-2">Phòng: <span>{placeholderShowtime.hall}</span></div>
-                        <div className="flex items-center gap-2">Định dạng: <span>{placeholderShowtime.format}</span></div>
+                        <div className="flex items-center gap-2"><Calendar className="h-4 w-4 text-primary" /> <span>{showtime.date !== "N/A" ? new Date(showtime.date).toLocaleDateString('vi-VN') : "N/A"}</span></div>
+                        <div className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> <span>{showtime.time}</span></div>
+                        <div className="flex items-center gap-2">Phòng: <span>{showtime.hall}</span></div>
+                        <div className="flex items-center gap-2">Định dạng: <span>{showtime.format}</span></div>
                     </CardContent>
                 </Card>
             )}
@@ -125,7 +175,7 @@ export default function BookingPage({ params }: BookingPageProps) {
                     <Image src={movie.posterUrl} alt={movie.title} width={80} height={120} className="rounded-md aspect-[2/3] object-cover" data-ai-hint="movie poster small" />
                     <div>
                         <h3 className="font-semibold">{movie.title}</h3>
-                        {placeholderShowtime && <p className="text-xs text-muted-foreground">{placeholderShowtime.date} - {placeholderShowtime.time} - {placeholderShowtime.hall}</p>}
+                        {showtime && <p className="text-xs text-muted-foreground">{showtime.date !== "N/A" ? new Date(showtime.date).toLocaleDateString('vi-VN') : "N/A"} - {showtime.time} - {showtime.hall}</p>}
                     </div>
                 </div>
                 <Separator />
@@ -157,3 +207,4 @@ export default function BookingPage({ params }: BookingPageProps) {
     </MainLayout>
   );
 }
+
