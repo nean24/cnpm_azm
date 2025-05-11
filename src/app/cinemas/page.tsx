@@ -22,6 +22,11 @@ const getMovieTitle = (movieId: string): string => {
 const getMoviePoster = (movieId: string): string => {
   const movie = mockMovies.find(m => m.id === movieId);
   return movie ? movie.posterUrl : "https://picsum.photos/seed/unknown_movie/100/150";
+};
+
+const getMovieAiHint = (movieId: string): string => {
+  const movie = mockMovies.find(m => m.id === movieId);
+  return movie ? movie.aiHint : "movie poster";
 }
 
 export default function CinemasPage() {
@@ -101,7 +106,7 @@ export default function CinemasPage() {
                                 width={150} 
                                 height={225} 
                                 className="w-full rounded-md object-cover aspect-[2/3]"
-                                data-ai-hint="movie poster" // General hint for movie posters
+                                data-ai-hint={getMovieAiHint(movieId)} 
                               />
                             </Link>
                           </div>

@@ -1,6 +1,6 @@
 
 import { MainLayout } from '@/components/layout/main-layout';
-import { getMovieById, getShowtimesByMovieId, mockCinemas, type Showtime, type Cinema, type Hall } from '@/data/mock-data';
+import { getMovieById, getShowtimesByMovieId, mockCinemas, type Showtime, type Cinema, type Hall, type Movie } from '@/data/mock-data';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -70,7 +70,7 @@ export default function MovieDetailPage({ params }: MovieDetailPageProps) {
               width={600}
               height={900}
               className="w-full rounded-lg object-cover shadow-xl aspect-[2/3]"
-              data-ai-hint="movie poster" // General hint for movie posters
+              data-ai-hint={movie.aiHint}
             />
           </div>
 

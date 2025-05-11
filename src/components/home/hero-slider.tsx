@@ -63,7 +63,7 @@ export function HeroSlider({ movies }: HeroSliderProps) {
             objectFit="cover"
             priority={index === 0}
             className="brightness-50"
-            data-ai-hint="movie poster" // General hint for movie posters
+            data-ai-hint={movie.aiHint} 
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 p-8 text-center text-white">
             <h1 className="mb-4 text-4xl font-bold md:text-6xl animate-fade-in-down">

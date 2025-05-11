@@ -23,7 +23,7 @@ export function MovieCard({ movie, className }: MovieCardProps) {
             width={400}
             height={600}
             className="h-full w-full object-cover"
-            data-ai-hint="movie poster" // General hint for movie posters
+            data-ai-hint={movie.aiHint} 
           />
         </Link>
         <Badge variant={movie.status === 'now_showing' ? "destructive" : "secondary"} className="absolute top-2 right-2 bg-primary text-primary-foreground">

@@ -172,7 +172,13 @@ export default function BookingPage({ params }: BookingPageProps) {
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-3">
-                    <Image src={movie.posterUrl} alt={movie.title} width={80} height={120} className="rounded-md aspect-[2/3] object-cover" data-ai-hint="movie poster small" />
+                    <Image 
+                        src={movie.posterUrl} 
+                        alt={movie.title} 
+                        width={80} 
+                        height={120} 
+                        className="rounded-md aspect-[2/3] object-cover" 
+                        data-ai-hint={movie.aiHint} />
                     <div>
                         <h3 className="font-semibold">{movie.title}</h3>
                         {showtime && <p className="text-xs text-muted-foreground">{showtime.date !== "N/A" ? new Date(showtime.date).toLocaleDateString('vi-VN') : "N/A"} - {showtime.time} - {showtime.hall}</p>}
