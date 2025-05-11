@@ -79,7 +79,7 @@ export function Header() {
               placeholder="Tìm kiếm phim..."
               className={cn(
                 "h-9 w-full rounded-md pl-9 pr-2 text-sm md:w-[200px] lg:w-[250px]",
-                "border-primary-foreground/50 bg-transparent placeholder-primary-foreground/70 text-primary-foreground focus:border-primary-foreground"
+                "border-primary-foreground/50 bg-transparent placeholder-primary-foreground text-primary-foreground focus:border-primary-foreground"
               )}
             />
           </div>
@@ -88,10 +88,10 @@ export function Header() {
             {currentAuthItems.map((item) => (
                <Button
                 key={item.href}
-                variant={(item.href.includes('register') || item.href.includes('profile') || item.href.includes('login')) ? "default" : "outline"}
+                variant={(item.href.includes('register')) ? "default" : "outline"}
                 asChild
                 className={cn("text-sm",
-                  (item.href.includes('register') || item.href.includes('profile') || item.href.includes('login'))
+                  (item.href.includes('register') || item.href.includes('login'))
                   ? "bg-accent hover:bg-accent/90 text-accent-foreground" 
                   : "border-primary-foreground/30 hover:bg-primary/80 hover:text-primary-foreground text-primary-foreground"
                 )}
