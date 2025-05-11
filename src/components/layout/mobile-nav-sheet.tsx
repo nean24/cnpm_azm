@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
@@ -28,7 +29,10 @@ export function MobileNavSheet({ isOpen, onOpenChange, navItems, authItems }: Mo
                 className="justify-start text-lg"
                 asChild
               >
-                <Link href={item.href} onClick={() => onOpenChange(false)}>{item.label}</Link>
+                <Link href={item.href} onClick={() => onOpenChange(false)}>
+                  {item.icon && <item.icon className="mr-2 h-5 w-5" />}
+                  {item.label}
+                </Link>
               </Button>
             ))}
           </nav>
@@ -41,7 +45,10 @@ export function MobileNavSheet({ isOpen, onOpenChange, navItems, authItems }: Mo
                 className="justify-start text-lg"
                 asChild
               >
-                <Link href={item.href} onClick={() => onOpenChange(false)}>{item.label}</Link>
+                <Link href={item.href} onClick={() => onOpenChange(false)}>
+                   {item.icon && <item.icon className="mr-2 h-5 w-5" />}
+                  {item.label}
+                </Link>
               </Button>
             ))}
           </nav>

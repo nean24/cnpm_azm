@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, Search, Film } from 'lucide-react';
+import { Menu, Search, Film, Ticket } from 'lucide-react'; // Added Ticket
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { MobileNavSheet } from './mobile-nav-sheet';
@@ -12,11 +12,13 @@ import { cn } from '@/lib/utils';
 export interface NavItem {
   href: string;
   label: string;
+  icon?: React.ElementType;
 }
 
 const mainNavItems: NavItem[] = [
   { href: '/movies', label: 'PHIM' },
   { href: '/cinemas', label: 'RẠP AZM' },
+  { href: '/quick-book', label: 'ĐẶT VÉ NHANH', icon: Ticket }, // Added Quick Book
   { href: '/contact', label: 'LIÊN HỆ' },
 ];
 
@@ -59,6 +61,7 @@ export function Header() {
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background"
               )}
             >
+              {item.icon && <item.icon className="mr-1.5 h-4 w-4 inline-block" />}
               {item.label}
               <span
                 className={cn(
@@ -79,7 +82,7 @@ export function Header() {
               placeholder="Tìm kiếm phim..."
               className={cn(
                 "h-9 w-full rounded-md pl-9 pr-2 text-sm md:w-[200px] lg:w-[250px]",
-                "border-primary-foreground/50 bg-transparent placeholder-primary-foreground text-primary-foreground focus:border-primary-foreground"
+                "border-primary-foreground/50 bg-primary/20 placeholder-primary-foreground/70 text-primary-foreground focus:border-accent focus:bg-primary/30"
               )}
             />
           </div>
@@ -91,9 +94,9 @@ export function Header() {
                 variant={(item.href.includes('register')) ? "default" : "outline"}
                 asChild
                 className={cn("text-sm",
-                  (item.href.includes('register') || item.href.includes('login'))
+                  (item.href.includes('register'))
                   ? "bg-accent hover:bg-accent/90 text-accent-foreground" 
-                  : "border-primary-foreground/30 hover:bg-primary/80 hover:text-primary-foreground text-primary-foreground"
+                  : "border-accent/50 bg-accent text-accent-foreground hover:bg-accent/90" 
                 )}
               >
                 <Link href={item.href}>{item.label}</Link>
