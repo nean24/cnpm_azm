@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react'; // Added 'use'
 import { MainLayout } from '@/components/layout/main-layout';
 import { PageTitle } from '@/components/shared/page-title';
 import { SeatMap } from '@/components/booking/seat-map';
@@ -19,7 +19,7 @@ import { Separator } from '@/components/ui/separator';
 
 
 interface BookingPageProps {
-  params: { movieId: string };
+  params: { movieId: string }; // Prop type from Next.js
 }
 
 interface SelectedSeat {
@@ -28,36 +28,36 @@ interface SelectedSeat {
   status: string; 
 }
 
-export default function BookingPage({ params }: BookingPageProps) {
+export default function BookingPage({ params: paramsProp }: BookingPageProps) {
   const router = useRouter();
   const { toast } = useToast();
   const searchParams = useSearchParams();
   const showtimeQuery = searchParams.get('showtime'); 
 
+  // Unwrap paramsProp using React.use() as suggested by the Next.js error message.
+  // This assumes `paramsProp` is promise-like or a special object Next.js provides.
+  const params = use(paramsProp as any); 
+
   const [movie, setMovie] = useState<Movie | undefined | null>(null);
-  const [showtime, setShowtime] = useState<ShowtimeType | null>(null); // Placeholder for actual showtime data
+  const [showtime, setShowtime] = useState<ShowtimeType | null>(null);
   const [selectedSeats, setSelectedSeats] = useState<SelectedSeat[]>([]);
 
   useEffect(() => {
+    // Now use `params.movieId` from the resolved/unwrapped params
     const fetchedMovie = getMovieById(params.movieId);
     setMovie(fetchedMovie);
 
-    // In a real app, you'd fetch showtime details using showtimeQuery
-    // For this mock, we'll find it or use a placeholder
     if (fetchedMovie && showtimeQuery) {
-      // This is a simplified mock. A real app would query its showtime data source.
-      // Here, we assume a placeholder structure.
       const placeholderShowtime = { 
         id: showtimeQuery,
         time: "19:00", 
-        date: new Date().toISOString().split('T')[0], // Today's date
+        date: new Date().toISOString().split('T')[0], 
         hall: "Hội trường A", 
         format: "2D" 
       };
       setShowtime(placeholderShowtime as any);
     } else if (fetchedMovie) {
-      // Fallback if no showtime in query, perhaps default to first available or just movie info
-       const fallbackShowtime = { 
+      const fallbackShowtime = { 
         id: 'default',
         time: "N/A", 
         date: "N/A", 
@@ -67,7 +67,7 @@ export default function BookingPage({ params }: BookingPageProps) {
       setShowtime(fallbackShowtime as any);
     }
 
-  }, [params.movieId, showtimeQuery]);
+  }, [params.movieId, showtimeQuery]); // Updated dependency array
 
 
   const handleSeatsSelected = (seats: SelectedSeat[]) => {
@@ -99,7 +99,6 @@ export default function BookingPage({ params }: BookingPageProps) {
       userInfo: formData,
     });
 
-    // Simulate API call for booking
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     toast({
@@ -111,7 +110,7 @@ export default function BookingPage({ params }: BookingPageProps) {
     router.push(`/profile?booking_success=${params.movieId}`); 
   };
 
-  if (movie === null) { // Still loading movie data
+  if (movie === null) { 
     return (
       <MainLayout>
         <div className="container mx-auto flex h-[60vh] items-center justify-center px-4 py-12">
@@ -137,8 +136,7 @@ export default function BookingPage({ params }: BookingPageProps) {
     );
   }
 
-  // Placeholder pricing
-  const ticketPrice = 100000; // 100,000 VND per ticket
+  const ticketPrice = 100000; 
   const totalAmount = selectedSeats.length * ticketPrice;
 
   return (
@@ -166,7 +164,7 @@ export default function BookingPage({ params }: BookingPageProps) {
           </div>
 
           <div className="lg:col-span-1">
-            <Card className="shadow-lg">
+            <Card className="shadow-lg sticky top-24"> {/* Removed sticky for now, can be re-evaluated */}
               <CardHeader>
                 <CardTitle className="text-xl">Tóm Tắt Đơn Hàng</CardTitle>
               </CardHeader>
