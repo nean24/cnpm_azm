@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useMemo } from 'react';
@@ -7,9 +8,11 @@ import { mockCinemas, mockShowtimes, mockMovies, type Cinema, type Showtime, typ
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { MapPin, CalendarDays, Clock, Video, Ticket } from 'lucide-react';
+import { MapPin, Clock, Video } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
+import { cn } from "@/lib/utils";
 
 const getMovieTitle = (movieId: string): string => {
   const movie = mockMovies.find(m => m.id === movieId);
@@ -65,8 +68,15 @@ export default function CinemasPage() {
                   <CardTitle className="flex items-center gap-2 text-2xl text-primary">
                     <MapPin className="h-6 w-6" /> {cinema.name}
                   </CardTitle>
-                  <p className="text-sm text-muted-foreground">{cinema.address}</p>
-                  {cinema.type === 'Rạp VIP' && <span className="text-sm font-semibold text-accent">Rạp VIP</span>}
+                  <div className="text-sm text-muted-foreground space-y-1">
+                    <p>{cinema.address}</p>
+                    <p>
+                      <span className="font-semibold">Loại rạp: </span>
+                      <span className={cn("font-medium", cinema.type === 'Rạp VIP' ? "text-accent" : "text-foreground")}>
+                        {cinema.type}
+                      </span>
+                    </p>
+                  </div>
                 </CardHeader>
                 <CardContent className="p-4 md:p-6">
                   <h3 className="mb-4 text-xl font-semibold">Lịch chiếu phim hôm nay:</h3>
@@ -125,4 +135,3 @@ export default function CinemasPage() {
     </MainLayout>
   );
 }
-
