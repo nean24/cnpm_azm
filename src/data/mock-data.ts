@@ -244,6 +244,7 @@ export const mockCinemas: Cinema[] = [
     halls: [
       { id: 'hallA', name: 'Hội trường A' },
       { id: 'hallB', name: 'Hội trường B' },
+      { id: 'hallC', name: 'Hội trường C' },
     ],
   },
   {
@@ -251,75 +252,62 @@ export const mockCinemas: Cinema[] = [
     name: 'AZM Cinema VIP Gò Vấp',
     address: '123 Phan Văn Trị, Gò Vấp, TP. HCM',
     type: 'Rạp VIP',
-    halls: [{ id: 'hallVIP1', name: 'Phòng VIP 1' }],
+    halls: [
+      { id: 'hallVIP1', name: 'Phòng VIP 1' },
+      { id: 'hallVIP2', name: 'Phòng VIP 2' },
+    ],
   },
+  {
+    id: 'cinema3',
+    name: 'AZM Cinema Thủ Đức',
+    address: '23 Võ Văn Ngân, Linh Chiểu, Thủ Đức, TP. HCM',
+    type: 'Tất cả rạp',
+    halls: [
+        {id: 'hallX', name: 'Phòng chiếu X'},
+        {id: 'hallY', name: 'Phòng chiếu Y'},
+    ]
+  }
 ];
 
-export const mockShowtimes: Showtime[] = [
-  // Dune: Hành Tinh Cát - Phần Hai (1)
+let initialShowtimes: Showtime[] = [
+  // Original fixed showtimes for specific dates
   { id: 'st1', movieId: '1', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-03-01', startTime: '18:00', format: '3D' },
   { id: 'st2', movieId: '1', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-03-01', startTime: '21:30', format: '2D' },
   { id: 'st3', movieId: '1', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-03-02', startTime: '20:00', format: '3D' },
   { id: 'st1_alt1', movieId: '1', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-03-02', startTime: '19:00', format: '2D' },
-
-
-  // Godzilla x Kong: Đế Chế Mới (2)
   { id: 'st4', movieId: '2', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-03-29', startTime: '19:00', format: '2D' },
   { id: 'st5', movieId: '2', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-03-30', startTime: '17:00', format: '2D' },
   { id: 'st2_alt1', movieId: '2', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-03-30', startTime: '20:30', format: '3D' },
-
-  // Kung Fu Panda 4 (3)
   { id: 'st6', movieId: '3', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-03-08', startTime: '16:00', format: '2D' },
   { id: 'st7', movieId: '3', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-03-09', startTime: '14:00', format: '3D' },
   { id: 'st3_alt1', movieId: '3', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-03-08', startTime: '18:00', format: '2D' },
-  
-  // Furiosa: Câu Chuyện Từ Max Điên (4) 
   { id: 'st8', movieId: '4', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-02-24', startTime: '19:30', format: '2D' },
   { id: 'st9', movieId: '4', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-02-25', startTime: '18:30', format: '3D' },
   { id: 'st4_alt1', movieId: '4', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-02-26', startTime: '21:00', format: '2D' },
-
-  // Hành Tinh Khỉ: Vương Quốc Mới (5)
   { id: 'st10', movieId: '5', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-02-10', startTime: '15:00', format: '3D' },
   { id: 'st11', movieId: '5', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-02-11', startTime: '17:30', format: '2D' },
   { id: 'st5_alt1', movieId: '5', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-02-12', startTime: '19:00', format: '3D' },
-
-  // Những Mảnh Ghép Cảm Xúc 2 (6) 
   { id: 'st12', movieId: '6', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-02-15', startTime: '20:15', format: '2D' },
   { id: 'st13', movieId: '6', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-02-16', startTime: '19:00', format: '3D' },
   { id: 'st6_alt1', movieId: '6', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-02-17', startTime: '16:30', format: '2D' },
-
-  // Kẻ Trộm Mặt Trăng 4 (7)
   { id: 'st14', movieId: '7', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-03-03', startTime: '22:00', format: '2D' },
   { id: 'st15', movieId: '7', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-03-04', startTime: '21:00', format: '2D' },
   { id: 'st7_alt1', movieId: '7', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-03-05', startTime: '17:00', format: '3D' },
-
-  // The Garfield Movie (8)
   { id: 'st16', movieId: '8', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-02-28', startTime: '14:30', format: '2D' },
   { id: 'st17', movieId: '8', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-03-01', startTime: '16:30', format: '2D' },
   { id: 'st8_alt1', movieId: '8', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-03-02', startTime: '11:00', format: '2D' },
-
-  // Coming Soon Movies for March 2025
-  // Vùng Đất Câm Lặng: Ngày Một (9) 
   { id: 'st18', movieId: '9', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-03-28', startTime: '18:00', format: '2D' },
   { id: 'st22', movieId: '9', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-03-29', startTime: '20:45', format: '2D' },
   { id: 'st9_alt1', movieId: '9', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-03-28', startTime: '22:00', format: '2D' },
-
-  // Deadpool & Wolverine (10)
   { id: 'st19', movieId: '10', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-03-20', startTime: '19:45', format: '3D' },
   { id: 'st23', movieId: '10', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-03-21', startTime: '22:15', format: '2D' },
   { id: 'st10_alt1', movieId: '10', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-03-22', startTime: '17:00', format: '3D' },
-
-  // Wicked: Phần Một (11)
   { id: 'st20', movieId: '11', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-03-27', startTime: '13:00', format: '2D' }, 
   { id: 'st24', movieId: '11', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-03-28', startTime: '15:30', format: '2D' },
   { id: 'st11_alt1', movieId: '11', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-03-29', startTime: '10:00', format: '2D' },
-  
-  // Moana 2 (12) 
   { id: 'st21', movieId: '12', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-03-27', startTime: '17:00', format: '3D' }, 
   { id: 'st25', movieId: '12', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-03-28', startTime: '10:00', format: '2D' },
   { id: 'st12_alt1', movieId: '12', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-03-29', startTime: '12:30', format: '3D' },
-
-  // Add more showtimes for Feb 2025 for various movies and cinemas
   { id: 'st_feb1', movieId: '4', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-02-25', startTime: '10:00', format: '2D' },
   { id: 'st_feb2', movieId: '4', cinemaId: 'cinema1', hallId: 'hallB', date: '2025-02-25', startTime: '13:00', format: '3D' },
   { id: 'st_feb3', movieId: '5', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-02-15', startTime: '14:00', format: '2D' },
@@ -328,6 +316,77 @@ export const mockShowtimes: Showtime[] = [
   { id: 'st_feb6', movieId: '6', cinemaId: 'cinema2', hallId: 'hallVIP1', date: '2025-02-20', startTime: '13:30', format: '2D' },
   { id: 'st_feb7', movieId: '8', cinemaId: 'cinema1', hallId: 'hallA', date: '2025-02-28', startTime: '17:45', format: '3D' },
 ];
+
+const formatDate = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const generateRandomShowtimes = (): Showtime[] => {
+  const newShowtimes: Showtime[] = [];
+  const today = new Date();
+  const twoWeeksLater = new Date(today);
+  twoWeeksLater.setDate(today.getDate() + 14);
+
+  let showtimeIdCounter = initialShowtimes.length + 1000; // Start with a high number to avoid collision
+
+  const possibleTimes = ['09:00', '10:30', '11:15', '13:00', '14:45', '15:30', '17:15', '18:00', '19:00', '19:45', '20:30', '21:15', '22:00'];
+  const formats: ('2D' | '3D')[] = ['2D', '3D'];
+
+  for (let d = new Date(today); d <= twoWeeksLater; d.setDate(d.getDate() + 1)) {
+    const dateStr = formatDate(d);
+
+    for (const movie of mockMovies) {
+      // Only schedule movies that are 'now_showing' or 'coming_soon' and their release date is in the past or today
+      const releaseDate = new Date(movie.releaseDate);
+      if ( (movie.status === 'now_showing' || movie.status === 'coming_soon') && releaseDate <= d) {
+        for (const cinema of mockCinemas) {
+          for (const hall of cinema.halls) {
+            // Add 2-4 random showtimes per hall per day
+            const numShowtimesPerDay = Math.floor(Math.random() * 3) + 2; // 2 to 4
+            for (let i = 0; i < numShowtimesPerDay; i++) {
+              const randomTime = possibleTimes[Math.floor(Math.random() * possibleTimes.length)];
+              const randomFormat = formats[Math.floor(Math.random() * formats.length)];
+              
+              // Ensure no duplicate showtime for the same movie, cinema, hall, date, and time
+              const exists = newShowtimes.some(st => 
+                st.movieId === movie.id &&
+                st.cinemaId === cinema.id &&
+                st.hallId === hall.id &&
+                st.date === dateStr &&
+                st.startTime === randomTime
+              ) || initialShowtimes.some(st => 
+                st.movieId === movie.id &&
+                st.cinemaId === cinema.id &&
+                st.hallId === hall.id &&
+                st.date === dateStr &&
+                st.startTime === randomTime
+              );
+
+              if (!exists) {
+                newShowtimes.push({
+                  id: `st_gen_${showtimeIdCounter++}`,
+                  movieId: movie.id,
+                  cinemaId: cinema.id,
+                  hallId: hall.id,
+                  date: dateStr,
+                  startTime: randomTime,
+                  format: randomFormat,
+                });
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return newShowtimes;
+};
+
+
+export const mockShowtimes: Showtime[] = [...initialShowtimes, ...generateRandomShowtimes()];
 
 
 export const genres = [
@@ -379,4 +438,17 @@ export const getShowtimesForMovieInCinemaOnDate = (movieId: string, cinemaId: st
       const timeB = parseInt(b.startTime.replace(':', ''), 10);
       return timeA - timeB;
     });
+};
+
+// Helper to get all movies that are now showing or coming soon and have showtimes
+export const getAvailableMoviesWithShowtimes = (): Movie[] => {
+  const today = new Date();
+  const movieIdsWithShowtimes = new Set(mockShowtimes.map(st => st.movieId));
+  return mockMovies.filter(movie =>
+    movieIdsWithShowtimes.has(movie.id) &&
+    (movie.status === 'now_showing' || 
+     (movie.status === 'coming_soon' && new Date(movie.releaseDate) >= today) || // Allow coming soon if release date is today or future
+     (movie.status === 'coming_soon' && new Date(movie.releaseDate) < today && mockShowtimes.some(st => st.movieId === movie.id && new Date(st.date) >= today)) // Allow past 'coming_soon' if they have future showtimes
+    )
+  );
 };
