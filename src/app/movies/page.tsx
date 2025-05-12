@@ -1,5 +1,5 @@
 "use client"; // Required for useState and event handlers in filters
-
+import { Suspense } from 'react';
 import { useState, useMemo } from 'react';
 import { MainLayout } from '@/components/layout/main-layout';
 import { MovieCard } from '@/components/shared/movie-card';
@@ -8,7 +8,9 @@ import { MovieFilters } from '@/components/shared/movie-filters';
 import { mockMovies, type Movie } from '@/data/mock-data';
 import { useSearchParams } from 'next/navigation';
 
-export default function MoviesPage() {
+
+function MoviesPageContent() {
+
   const searchParams = useSearchParams();
   const initialStatus = searchParams.get('status');
 
@@ -59,5 +61,13 @@ export default function MoviesPage() {
         )}
       </div>
     </MainLayout>
+  );
+}
+
+export default function MoviesPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MoviesPageContent />
+    </Suspense>
   );
 }
